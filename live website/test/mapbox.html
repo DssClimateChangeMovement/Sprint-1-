@@ -1,0 +1,3049 @@
+<html class="im-a-map">
+	<head>
+		<meta charset="utf-8">
+
+<script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
+
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>
+
+
+<style>
+
+ body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+
+.filter-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:100;
+  padding:10px 20px;
+  border-radius: 2px;
+
+}
+.leaflet-container img.leaflet-marker-icon {
+/*     display: none!important; */
+}
+
+</style>
+	</head>
+	<body>
+	
+	<nav id='filters' class='filter-ui'>Filter</nav>
+	<div id='map'></div>
+	
+	
+<script>
+
+//k00rdinate http://www.mapcoordinates.net/en
+//this is MAPbox 
+//also google API is here: https://appendto.com/2016/09/advanced-google-maps-with-javascript-filtering-and-displaying-information/
+
+//L.mapbox.accessToken = 'pk.eyJ1IjoiZG9zcyIsImEiOiI1NFItUWs4In0.-9qpbOfE3jC68WDUQA1Akg';
+L.mapbox.accessToken = 'pk.eyJ1IjoibWFubGlvbWEiLCJhIjoiY2sxMGpscm12MDAzYTNtbTBpbG1xbGtseCJ9.15GFQbK8MTkuVOCILGYLNw';
+var map = L.mapbox.map('map') .setView([45.2671352, 19.8335496], 3);
+
+
+
+var CmUrl = "https://climatemovements.dss.cloud/inc/json/movements.geo.json";
+
+var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+//featureLayer.loadURL(CmUrl);
+
+//L.mapbox.styleLayer('mapbox://styles/manlioma/ck124p4pp09w71cm7sf5233qf').addTo(map);
+
+L.mapbox.styleLayer('mapbox://styles/manlioma/ck155300t2h1r1cpa1nm0ng6z').addTo(map);
+
+
+
+var cmGeo = {
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Coderood",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 13.4015,52.5218 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Germany",
+    "City":"Berlin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.35,50.85 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Belgium",
+    "City":"Brussels"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 149.1269,-35.2931 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Australia",
+    "City":"Canberra"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5683,55.6761 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Denmark",
+    "City":"Copenhagen"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 6.15,46.2 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Switzerland",
+    "City":"Geneva"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -4.3632,43.3539 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Spain",
+    "City":"Madrid"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.75,59.9167 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Norway",
+    "City":"Oslo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -75.695,45.4247 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Canada",
+    "City":"Ottawa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 2.3508,48.8567 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"France",
+    "City":"Paris"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.466,50.0833 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Czech republic",
+    "City":"Prague"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 28.1881,-25.7461 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"South Africa",
+    "City":"Pretoria"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5,41.883 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"Italy",
+    "City":"Rome"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"United States",
+    "City":"Washinton DC"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7772,-41.2889 ]
+    },
+    "properties": {
+    "Movement":"Exctinction Rebellion",
+    "Country":"New Zealand",
+    "City":"Wellington"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 114.185,22.305 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Hong Kong",
+    "City":"Hong Kong"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 28.9638,41.013 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Turkey",
+    "City":"Istanbul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 106.8294,-6.1744 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Indonesia",
+    "City":"Jakarta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.033,-12.05 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Peru",
+    "City":"Lima"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 37.6155,55.7522 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Russia",
+    "City":"Moscow"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.75,59.9167 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Norway",
+    "City":"Oslo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -75.695,45.4247 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Canada",
+    "City":"Ottowa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 2.3508,48.8567 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"France",
+    "City":"Paris"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -46.633,-23.55 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Brazil",
+    "City":"Sao Paulo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.9997,37.5663 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"South Korea",
+    "City":"Seoul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 18.0686,59.3294 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Sweden",
+    "City":"Stockholm"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 151.2094,-33.865 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Australia",
+    "City":"Sydney"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.2597,38.8996 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"Austria",
+    "City":"Vienna"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 18.5,45.43 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"South Africa",
+    "City":"Vuka"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"United States",
+    "City":"Washington DC "
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7772,-41.2889 ]
+    },
+    "properties": {
+    "Movement":"Fossil Free",
+    "Country":"New Zealand",
+    "City":"Wellington"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 23.7278,37.984 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Greece",
+    "City":"Athens"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 100.5166,13.75 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Thailand",
+    "City":"Bangkok"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 116.3883,39.9289 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"China",
+    "City":"Beijing"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -111.175,45.7796 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Serbia",
+    "City":"Belgrade"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 7.45,46.95 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Switzerland",
+    "City":"Bern"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -74.0293,40.875 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Colombia",
+    "City":"Bogota"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5683,55.6761 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Denmark",
+    "City":"Copenhagen"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -6.267,53.35 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Ireland",
+    "City":"Dublin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -3.189,55.953 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Scotland (UK)",
+    "City":"Edinburgh"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 8.683,50.117 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Germany",
+    "City":"Frankfurt"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 3.733,51.05 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Belgium",
+    "City":"Ghent"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.9375,60.1708 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Finland",
+    "City":"Helsinki"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 73.0629,33.7148 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Pakistan",
+    "City":"Islamabad"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 30.5166,50.4334 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Ukraine",
+    "City":"Kiev"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -9.1449,38.7227 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Portugal",
+    "City":"Lisbon"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5083,46.0556 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Slovenia",
+    "City":"Ljubljana"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"England (UK)",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 6.13,49.6117 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Luxembourg",
+    "City":"Luxembourg"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -4.3632,43.3539 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Spain",
+    "City":"Madrid"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 120.9772,14.5958 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Philippines",
+    "City":"Manila"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -99.131,19.4424 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Mexico",
+    "City":"Mexico City"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -56.1819,-34.8836 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Uruguay",
+    "City":"Montevideo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 37.6155,55.7522 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Russia",
+    "City":"Moscow"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 77.2089,28.6139 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"India",
+    "City":"New Dehli"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 33.365,35.1725 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Cyprus",
+    "City":"Nicosia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 33.365,35.1725 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Cyprus",
+    "City":"Nicosia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.75,59.9167 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Norway",
+    "City":"Oslo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -75.695,45.4247 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Canada",
+    "City":"Ottawa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 2.3508,48.8567 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"France",
+    "City":"Paris"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.466,50.0833 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Czech Republic",
+    "City":"Prague"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -21.9333,64.1333 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Iceland",
+    "City":"Rekjavik"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.1064,56.9489 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Latvia",
+    "City":"Riga"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5,41.883 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Italy",
+    "City":"Rome"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -70.667,-33.45 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Chile",
+    "City":"Santiago"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.9997,37.5663 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"South Korea",
+    "City":"Seoul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 18.0686,59.3294 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Sweden",
+    "City":"Stockholm"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 139.7514,35.685 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Japan",
+    "City":"Tokyo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5069,35.8844 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Malta",
+    "City":"Valletta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 21.0167,52.2333 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Poland",
+    "City":"Warsaw"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"United States",
+    "City":"Washington DC"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7772,-41.2889 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"New Zealand",
+    "City":"Wellington"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 16,45.8 ]
+    },
+    "properties": {
+    "Movement":"Fridays for Future",
+    "Country":"Croatia",
+    "City":"Zagreb"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.2,5.55 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Ghana",
+    "City":"Accra"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -57.635,-25.3 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Paraguay",
+    "City":"Asuncion"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -8,12.65 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Mali",
+    "City":"Bamako"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 13.4015,52.5218 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Germany",
+    "City":"Berlin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -74.0293,40.875 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Colombia",
+    "City":"Bogota"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.35,50.85 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Belgium",
+    "City":"Brussels"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 19.0833,47.5 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Hungary",
+    "City":"Budapest"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -56.6766,-36.7162 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Argentina",
+    "City":"Buenos Aires"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 149.1269,-35.2931 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Australia",
+    "City":"Canberra"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -92.27,14.9 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Mexico",
+    "City":"Chiapas"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -90.5353,14.6133 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Guatemala",
+    "City":"Ciudad de Guatemala"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 79.8428,6.9344 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Sri Lanka",
+    "City":"Colombo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5683,55.6761 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Denmark",
+    "City":"Copenhagen"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 39.2683,-6.8 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Tanzania",
+    "City":"Dar es Salaam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 90.3961,23.7161 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Bangladesh",
+    "City":"Dhaka"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 125.567,-8.567 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"East TImor",
+    "City":"Dili"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -6.267,53.35 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Ireland",
+    "City":"Dublin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 3.733,51.05 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Belgium",
+    "City":"Gent"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.9375,60.1708 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Finland",
+    "City":"Helsinki"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 106.8294,-6.1744 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Indonesia",
+    "City":"Jakarta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 32.5833,0.3167 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Uganda",
+    "City":"Kampala"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 85.267,27.767 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Nepal",
+    "City":"Kathmandu"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 101.7,3.1667 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Malaysia",
+    "City":"Kuala Lumpur"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5083,46.0556 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Slovenia",
+    "City":"Ljubljana"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 1.2228,6.1319 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Togo",
+    "City":"Lome"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 6.13,49.6117 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Luxembourg",
+    "City":"Luxembourg"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -4.3632,43.3539 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Spain",
+    "City":"Madrid"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 120.9772,14.5958 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Phillipines",
+    "City":"Manila"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -56.1819,-34.8836 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Urugay",
+    "City":"Montevideo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 37.6155,55.7522 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Russia",
+    "City":"Moscow"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 33.365,35.1725 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Cyprus",
+    "City":"Nicosia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.75,59.9167 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Norway",
+    "City":"Oslo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -75.695,45.4247 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Canada",
+    "City":"Ottowa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 2.3508,48.8567 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"France",
+    "City":"Paris"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -72.333,18.533 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Haiti",
+    "City":"Port au Prince"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 57.5,-20.1666 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Mauritius",
+    "City":"Port Louis"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 147.1494,-9.4789 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Papua New Guinea",
+    "City":"Port Moresby"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -51.23,-30.0331 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Brazil",
+    "City":"Porto Alegre"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 28.1881,-25.7461 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"South Africa",
+    "City":"Pretoria"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 35.2,31.9 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Palestine",
+    "City":"Ramallah"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.1064,56.9489 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Latvia",
+    "City":"Riga"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -121.9,37.3333 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Costa Rica",
+    "City":"San Jose"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -89.1914,13.6989 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"El Salvador",
+    "City":"San Salvador"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -70.667,-33.45 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Chile",
+    "City":"Santiago"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.9997,37.5663 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"South Korea",
+    "City":"Seoul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 21.4335,42 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Macedonia",
+    "City":"Skopje"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 23.33,42.7 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Bulgaria",
+    "City":"Sofia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -61.75,12.05 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Grenada",
+    "City":"St George"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.7453,59.4372 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Estonia",
+    "City":"Tallinn"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 44.7908,41.725 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Georgia",
+    "City":"Tbilisi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.217,14.1 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Honduras",
+    "City":"Tegucigalpa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 139.7514,35.685 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Japan",
+    "City":"Tokyo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.1817,36.8064 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Tunisia",
+    "City":"Tunis"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5069,35.8844 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Malta",
+    "City":"Valletta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.2597,38.8996 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Austria",
+    "City":"Vienna"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 25.283,54.683 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Lithuania",
+    "City":"Vilinus"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 21.0167,52.2333 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Poland",
+    "City":"Warzaw"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"United States",
+    "City":"Washington DC"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -68.933,12.117 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Curacao",
+    "City":"Willemstad"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 11.517,3.867 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Cameroon",
+    "City":"Yaounde"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 16,45.8 ]
+    },
+    "properties": {
+    "Movement":"Friends of the Earth",
+    "Country":"Croatia",
+    "City":"Zagreb"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 23.7278,37.984 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Greece",
+    "City":"Athens"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -84.39,33.755 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"United States",
+    "City":"Atlanta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 77.583,12.983 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"India",
+    "City":"Bangalore"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 100.5166,13.75 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Thailand",
+    "City":"Bangkok"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 116.3883,39.9289 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"China",
+    "City":"Beijing"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 35.5131,33.8869 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Lebanon",
+    "City":"Beirut"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 13.4015,52.5218 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Germany",
+    "City":"Berlin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -47.8828,-15.7939 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Brazil",
+    "City":"Brasilia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 17.1097,48.1439 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Slovakia",
+    "City":"Bratislava"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.35,50.85 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Belgium",
+    "City":"Brussels"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 26.0999,44.4334 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Romania",
+    "City":"Bucharest"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 19.0833,47.5 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Hungary",
+    "City":"Budapest"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -56.6766,-36.7162 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Argentina",
+    "City":"Buenos Aires"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5683,55.6761 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Denmark",
+    "City":"Copenhagen"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -17.4467,14.6928 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Senegal",
+    "City":"Dakar"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -113.5,53.533 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Canada",
+    "City":"Edmonton"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10,53.55 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Germany",
+    "City":"Hamburg"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 24.9375,60.1708 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Finland",
+    "City":"Helsinki"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 114.185,22.305 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Hong Kong",
+    "City":"Honk Kong"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 28.9638,41.013 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Turkey",
+    "City":"Istanbul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 106.8294,-6.1744 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Indonesia",
+    "City":"Jakarta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 28.0456,-26.2044 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"South Africa",
+    "City":"Johansburg"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 15.315,-4.3297 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Democratic Republic of Congo",
+    "City":"Kinshasa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 101.7,3.1667 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Malaysia",
+    "City":"Kuala Lampur "
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5083,46.0556 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Slovenia",
+    "City":"Ljubljana"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 6.13,49.6117 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Luxemburg",
+    "City":"Luxemburg"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -4.3632,43.3539 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Spain",
+    "City":"Madrid"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -60.017,-3.1 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Brazil",
+    "City":"Manaus"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -99.131,19.4424 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Mexico",
+    "City":"Mexico City"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.5617,45.5089 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Canada",
+    "City":"Montreal"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 37.6155,55.7522 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Russia",
+    "City":"Moscow"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 36.8172,-1.2864 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Kenya",
+    "City":"Nairobi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 10.75,59.9167 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Norway",
+    "City":"Oslo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 2.3508,48.8567 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"France",
+    "City":"Paris"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.466,50.0833 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Czech republic",
+    "City":"Prague"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.03,14.63 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Phillipines",
+    "City":"Quezon City"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 12.5,41.883 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Italy",
+    "City":"Rome"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -70.667,-33.45 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Chile",
+    "City":"Santiago"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -46.633,-23.55 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Brazil",
+    "City":"São Paulo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.9997,37.5663 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"South Korea",
+    "City":"Seoul"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 23.33,42.7 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Bulgaria",
+    "City":"Sofia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 18.0686,59.3294 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Sweden",
+    "City":"Stockholm"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5683,25.0358 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Taiwan",
+    "City":"Taipei"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 34.7795,32.0823 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Israel",
+    "City":"Tel Aviv"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 139.7514,35.685 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Japan",
+    "City":"Tokyo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -79.3733,43.7417 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Canada",
+    "City":"Toronto"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 151.1969,-33.8822 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Australia",
+    "City":"Ultimo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 14.5069,35.8844 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Malta",
+    "City":"Valetta"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -123.1,49.25 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Canada",
+    "City":"Vancouver"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.2597,38.8996 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Austria",
+    "City":"Vienna"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 21.0167,52.2333 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Poland",
+    "City":"Warsaw"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"United States",
+    "City":"Washinton DC"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7772,-41.2889 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"New Zealand",
+    "City":"Wellington"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -114.3975,62.4422 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Canada",
+    "City":"Yellow Knife"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 16,45.8 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Croatia",
+    "City":"Zagreb"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 8.55,47.367 ]
+    },
+    "properties": {
+    "Movement":"Greenpeace",
+    "Country":"Switzerland",
+    "City":"Zurich"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Metabolic",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -82.1942,28.3569 ]
+    },
+    "properties": {
+    "Movement":"Peoples Climate Movement",
+    "Country":"United States",
+    "City":"Florida"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.9249,40.6943 ]
+    },
+    "properties": {
+    "Movement":"Peoples Climate Movement",
+    "Country":"United States",
+    "City":"New York"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.4197,37.6536 ]
+    },
+    "properties": {
+    "Movement":"Peoples Climate Movement",
+    "Country":"United States",
+    "City":"San Francisco "
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -74.0682,40.7161 ]
+    },
+    "properties": {
+    "Movement":"Sunrise movement",
+    "Country":"United States",
+    "City":"New Jersey"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"Sunrise movement",
+    "Country":"United States",
+    "City":"Washington DC "
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"The Climate Group",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 77.2089,28.6139 ]
+    },
+    "properties": {
+    "Movement":"The Climate Group",
+    "Country":"India",
+    "City":"New Delhi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.9249,40.6943 ]
+    },
+    "properties": {
+    "Movement":"The Climate Group",
+    "Country":"United States",
+    "City":"New York"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.9249,40.6943 ]
+    },
+    "properties": {
+    "Movement":"The Climate Mobilization",
+    "Country":"United States",
+    "City":"New York"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -79.9152,40.0692 ]
+    },
+    "properties": {
+    "Movement":"The Climate Reality Project",
+    "Country":"United States",
+    "City":"California"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -0.1275,51.5072 ]
+    },
+    "properties": {
+    "Movement":"The Climate Reality Project",
+    "Country":"United Kingdom",
+    "City":"London"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.9249,40.6943 ]
+    },
+    "properties": {
+    "Movement":"The Climate Reality Project",
+    "Country":"United States",
+    "City":"New York"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.1905,47.4758 ]
+    },
+    "properties": {
+    "Movement":"The Climate Reality Project",
+    "Country":"United States",
+    "City":"Washington DC"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 8.55,47.367 ]
+    },
+    "properties": {
+    "Movement":"The Climate Reality Project",
+    "Country":"Switzerland",
+    "City":"Zurich"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 7.483,9.067 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Nigeria",
+    "City":"Abuja"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 4.9,52.367 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Netherlands",
+    "City":"Amsterdam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 116.3883,39.9289 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"China",
+    "City":"Beijing"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -74.0293,40.875 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Colombia",
+    "City":"Bogota"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -79.9152,40.0692 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"United States",
+    "City":"California"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 39.2683,-6.8 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Tanzania",
+    "City":"Dar es Salaam"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 55.28,25.23 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"United Arab Emirates",
+    "City":"Dubai"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -6.267,53.35 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Ireland",
+    "City":"Dublin"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -82.1942,28.3569 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"United States",
+    "City":"Florida"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 8.683,50.117 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Germany",
+    "City":"Frankfurt"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 85.267,27.767 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Nepal",
+    "City":"Kathmandu"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -9.1449,38.7227 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Portugal",
+    "City":"Lisbon"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -4.3632,43.3539 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Spain",
+    "City":"Madrid"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 144.9631,-37.8136 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Australia",
+    "City":"Melbourne"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 11.567,48.133 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Germany",
+    "City":"Munich"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 36.8172,-1.2864 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Kenya",
+    "City":"Nairobi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 77.2089,28.6139 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"India",
+    "City":"New Delhi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.9249,40.6943 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"United States",
+    "City":"New York"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -46.633,-23.55 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Brazil",
+    "City":"Sao Paulo"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.9997,37.5663 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Italy",
+    "City":"Sardinia"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 18.0686,59.3294 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Sweden",
+    "City":"Stockholm"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 139.7514,35.685 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"United States",
+    "City":"Texas"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 8.55,47.367 ]
+    },
+    "properties": {
+    "Movement":"Zero Hour ",
+    "Country":"Switzerland",
+    "City":"Zurich"
+    }
+  }
+]
+};
+
+
+
+map.featureLayer.setGeoJSON(cmGeo);
+
+
+/*
+var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+featureLayer.loadURL(CmUrl);
+*/
+
+// Find and store a variable reference to the list of filters.
+var filters = document.getElementById('filters');
+
+// Wait until the marker layer is loaded in order to build a list of possible
+// types. If you are doing this with another featureLayer, you should change
+// map.featureLayer to the variable you have assigned to your featureLayer.
+var makeCheckboxes = function() {
+  // Collect the types of symbols in this layer. you can also just
+  // hardcode an array of types if you know what you want to filter on,
+  // like var types = ['foo', 'bar'];
+  var typesObj = {}, types = [];
+
+  map.featureLayer.eachLayer(function (entity) {
+    typesObj[entity.feature.properties['Movement']] = true;
+  })
+  for (var k in typesObj) types.push(k);
+
+ 
+  
+  var checkboxes = [];
+  // Create a filter interface.
+  for (var i = 0; i < types.length; i++) {
+    // Create an an input checkbox and label inside.
+    var item = filters.appendChild(document.createElement('div'));
+    var checkbox = item.appendChild(document.createElement('input'));
+    var label = item.appendChild(document.createElement('label'));
+    checkbox.type = 'checkbox';
+    checkbox.id = types[i];
+    checkbox.value = types[i];
+    //checkbox.onclick = function() { showStations() };
+    checkbox.checked = true;
+    // create a label to the right of the checkbox with explanatory text
+    label.innerHTML = types[i];
+    label.setAttribute('for', types[i]);
+    label.setAttribute('value', types[i]);
+    
+    // Whenever a person clicks on this checkbox, call the update().
+    checkbox.addEventListener('change', update);
+    checkboxes.push(checkbox);
+
+  }
+  
+/*
+ 
+ 	// add markers to map
+	map.featureLayer.eachLayer(function(feature) {
+		// create a DOM element for the marker
+		var el = document.createElement('div');
+		el.className = 'marker' + feature.properties['Movement'];
+		//el.style.backgroundImage = 'url(https://placekitten.com/g/' + marker.properties.iconSize.join('/') + '/)';
+		el.style.width = '10px';
+		el.style.height = '30px';
+		 
+		el.addEventListener('click', function() {
+		window.alert(feature.properties['Movement']);
+		});
+		 
+		// add marker to map
+		new mapboxgl.Marker(el)
+		.setLngLat(feature.geometry.coordinates)
+		.addTo(map);
+	});
+*/
+
+ 
+// add markers to map
+cmGeo.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .addTo(map);
+});
+ 
+  // This function is called whenever someone clicks on a checkbox and changes
+  // the selection of markers to be displayed.
+  function update() {
+    var enabled = {};
+    // Run through each checkbox and record whether it is checked. If it is,
+    // add it to the object of types to display, otherwise do not.
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
+    }
+    map.featureLayer.setFilter(function(feature) {
+      // If this symbol is in the list, return true. if not, return false.
+      // The 'in' operator in javascript does exactly that: given a string
+      // or number, it says if that is in a object.
+      // 2 in { 2: true } // true
+      // 2 in { } // false
+      return (feature.properties['Movement'] in enabled);
+    });
+  }
+
+
+	
+  
+     
+}
+makeCheckboxes();
+
+
+ 
+
+
+</script>
+</body>
+</html>

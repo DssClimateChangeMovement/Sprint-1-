@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Clusters with custom cluster icons</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
+
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<div id='map'></div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoibWFubGlvbWEiLCJhIjoiY2sxMGpscm12MDAzYTNtbTBpbG1xbGtseCJ9.15GFQbK8MTkuVOCILGYLNw';
+// We add the backing styleLayer and use the featureLayer for its data.
+var map = L.mapbox.map('map')
+    .setView([0, 0], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+
+var CmUrl = "https://climatemovements.dss.cloud/inc/json/movements.geo.json";
+
+// add markers to map
+CmUrl.features.forEach(function(marker) {
+	// create a DOM element for the marker
+	var el = document.createElement('div');
+	el.className = 'marker' + marker.properties.Movement;
+	//el.style.backgroundImage = 'url(https://placekitten.com/g/' + marker.properties.iconSize.join('/') + '/)';
+	el.style.width = '10px';
+	el.style.height = '30px';
+	 
+	el.addEventListener('click', function() {
+	window.alert(marker.properties.Movement);
+	});
+	 
+	// add marker to map
+	new mapboxgl.Marker(el)
+	.setLngLat(marker.geometry.coordinates)
+	.addTo(map);
+	});
+
+</script>
+</body>
+</html>

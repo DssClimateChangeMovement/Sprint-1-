@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Legend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #map {
+        height: 100vh;
+        width: 100vw;
+      }
+      #legend {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+      }
+      #legend h3 {
+        margin-top: 0;
+      }
+      #legend img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+  
+  <div id="map"></div>
+
+<script>
+
+    function initMap() {
+
+	    var geoJson = "https://climatemovements.dss.cloud/inc/json/movements.geo.json";
+	    
+	    var url5 = "https://climatemovements.dss.cloud/inc/json/movements.geojson";
+
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 2,
+            center: { lat: 0, lng: 0 },
+            styles: [
+					    {
+					        "featureType": "administrative.locality",
+					        "elementType": "all",
+					        "stylers": [
+					            {
+					                "hue": "#2c2e33"
+					            },
+					            {
+					                "saturation": 7
+					            },
+					            {
+					                "lightness": 19
+					            },
+					            {
+					                "visibility": "on"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "landscape",
+					        "elementType": "all",
+					        "stylers": [
+					            {
+					                "hue": "#ffffff"
+					            },
+					            {
+					                "saturation": -100
+					            },
+					            {
+					                "lightness": 100
+					            },
+					            {
+					                "visibility": "simplified"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "poi",
+					        "elementType": "all",
+					        "stylers": [
+					            {
+					                "hue": "#ffffff"
+					            },
+					            {
+					                "saturation": -100
+					            },
+					            {
+					                "lightness": 100
+					            },
+					            {
+					                "visibility": "off"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "road",
+					        "elementType": "geometry",
+					        "stylers": [
+					            {
+					                "hue": "#bbc0c4"
+					            },
+					            {
+					                "saturation": -93
+					            },
+					            {
+					                "lightness": 31
+					            },
+					            {
+					                "visibility": "simplified"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "road",
+					        "elementType": "labels",
+					        "stylers": [
+					            {
+					                "hue": "#bbc0c4"
+					            },
+					            {
+					                "saturation": -93
+					            },
+					            {
+					                "lightness": 31
+					            },
+					            {
+					                "visibility": "on"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "road.arterial",
+					        "elementType": "labels",
+					        "stylers": [
+					            {
+					                "hue": "#bbc0c4"
+					            },
+					            {
+					                "saturation": -93
+					            },
+					            {
+					                "lightness": -2
+					            },
+					            {
+					                "visibility": "simplified"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "road.local",
+					        "elementType": "geometry",
+					        "stylers": [
+					            {
+					                "hue": "#e9ebed"
+					            },
+					            {
+					                "saturation": -90
+					            },
+					            {
+					                "lightness": -8
+					            },
+					            {
+					                "visibility": "simplified"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "transit",
+					        "elementType": "all",
+					        "stylers": [
+					            {
+					                "hue": "#e9ebed"
+					            },
+					            {
+					                "saturation": 10
+					            },
+					            {
+					                "lightness": 69
+					            },
+					            {
+					                "visibility": "on"
+					            }
+					        ]
+					    },
+					    {
+					        "featureType": "water",
+					        "elementType": "all",
+					        "stylers": [
+					            {
+					                "hue": "#e9ebed"
+					            },
+					            {
+					                "saturation": -78
+					            },
+					            {
+					                "lightness": 67
+					            },
+					            {
+					                "visibility": "simplified"
+					            }
+					        ]
+					    }
+					]
+        });
+        
+        map.data.loadGeoJson(url5, null, function (features){
+		    markers = features.map(function(feature) {
+		        return new google.maps.Marker({
+		            position: feature.getGeometry().get(0),
+		            title: feature.getProperty('Movement')
+		        });
+		    });
+		
+		    var markerCluster = new MarkerClusterer(map, markers,
+		        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+		    
+			
+		        
+		});
+       // map.data.setMap(null);
+        
+        ClusterIcon.prototype.createCss = function (pos) {
+		    var size = 15;
+		    if (this.cluster_.getMarkers().length < 2) { size = 15; }
+		    if (this.cluster_.getMarkers().length > 2 && this.cluster_.getMarkers().length < 5) { size = 22; }
+		    if (this.cluster_.getMarkers().length > 5 && this.cluster_.getMarkers().length < 10) { size = 30; }
+		    if (this.cluster_.getMarkers().length > 10) { size = 37; }
+		
+		      style = ['border-radius : 50%',
+		        'cursor        : pointer',
+		        'position      : absolute',
+		        'top           : ' + pos.y + 'px',
+		        'left          : ' + pos.x + 'px',
+		        'width         : ' + size * 2 + 'px',
+		        'height        : ' + size * 2 + 'px',
+		        'line-height   : ' + (size * 2 + 1) + 'px',
+		        'text-align    : center',
+		        'background-color: #51B3C3',
+		        'color: #ffffff',
+		        'font-size:14px'
+		      ];
+		    return style.join(";") + ';';
+		};
+		
+		
+		
+
+
+
+    }
+    
+
+    
+
+</script>
+
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArVJ7yeb5iag01uYlOR29oIbOgZUyoCYs&callback=initMap"></script>
+
+  
+
+  </body>
+</html>
